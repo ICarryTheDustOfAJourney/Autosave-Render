@@ -13,7 +13,7 @@ Might be understood as a basic source control system for the ~~poor~~ artists.
 
 ## Installation
 
-- download the .py file to a location of your choice
+- [download](https://github.com/ICarryTheDustOfAJourney/Autosave-Render/raw/main/autosave.py) the .py file to a location of your choice
 - in Blender: Edit -> Preferences-> Add-on -> Install... and pick the .py file
 - don't forget to activate it 
 
