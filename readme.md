@@ -2,6 +2,7 @@
 
 ## Purpose 
 
+Usually, creating images/animations with Blender is a highly iterative trial-and-error process, that can lead into dead ends when using wrong techniques or taking bad artistic choices.
 When trying to resume at a better, former version, it can be difficult to find the matching .blend file for that state.
 
 When activated, every &lt;F12> will save the .blend-file of that moment in a unique, dynamically created directory, optionally together with the render image in a separate .png file after the rendering finished. 
