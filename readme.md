@@ -39,7 +39,7 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
 ## Advanced usage
 
 Shift your base-directory into the new sub-directory once you think you achieved significant progress with that render.
-This transforms the otherwise linear folder structure into a tree-structure, having the most elaborated versions in its branches.
+This transforms the otherwise linear folder structure into a tree-structure, having elaborated versions in its branches.
 
 Optionally rename the parent folder with a speaking name for better orientation lateron. The latest and/or best version should then be in the latest & deepest leaf folder.
 
