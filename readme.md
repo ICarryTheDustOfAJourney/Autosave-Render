@@ -9,6 +9,8 @@ When activated, every &lt;F12> will save the .blend-file of that moment in a uni
 
 This add-on creates new sub-directories named YYMMDD-hhmmss in a base-directroy of your choice. YYMMDD-hhmmss is the timestamp when the renderprocess was started.
 
+It provides an easy way to document progress over time and to jump back to an old state, if required.
+
 Might be understood as a basic source control system for the ~~poor~~ artists.
 
 ## Installation
