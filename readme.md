@@ -37,6 +37,7 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
 - it doesn't make much sense when active while creating animations (&lt;Ctrl>-&lt;F12>)
 - manually delete superflous directories
 - &lt;Shift>-Click on the folder icon opens the base-directory in your OS' file system browser
+- because the .blend file is saved before and the .png file after rendering, rendertime is also documented
 
 ## Advanced usage
 
