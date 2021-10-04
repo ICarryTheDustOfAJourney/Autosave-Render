@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Autosave-Render",
     "author": "Volker",
-    "version": (1, 0, 0),
+    "version": (1, 0, 1),
     "blender": (2, 92, 0),
     "location": "Properties Area > Output Properties > Autosave",
     "description": "Creates a YYMMDD-HHMMSS named subdirectory to save the .blend-file prior to rendering"
