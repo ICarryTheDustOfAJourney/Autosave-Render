@@ -19,7 +19,7 @@ Might be understood as a basic source control system for the ~~poor~~ artists.
 - in Blender: Edit -> Preferences-> Add-on -> Install... and pick the .py file
 - don't forget to activate it 
 
-Developed & tested under Windows 10 on Blender V2.92.0 and 3.0 Alpha.
+Developed & tested under Windows 10 on Blender V2.90.1 and 3.0 Alpha.
 Should work on other OSes and/or in older Blender versions too.
 
 ## Usage
