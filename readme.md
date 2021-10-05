@@ -29,6 +29,7 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
 - create/define the base-directory that will contain the dynamically created subdirectories
 - enable the "Autosave" checkmark to save .blend files before rendering
 - enable "Autosave .png after render" to save a .png file of the render image after rendering
+- enter a short comment to be appended to the new directory's name. Free shorthand reminder like "evee only", "applied" or "!" when used in production etc. Use only characters allowed in you filesystem (Windows: no ":&lt;&gt;" etc). Intended to be useful when revisiting after a while
 - render (&lt;F12>)
 
 ### Hints
