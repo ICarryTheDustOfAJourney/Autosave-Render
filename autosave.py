@@ -19,7 +19,7 @@
 bl_info = {
     "name": "Autosave-Render",
     "author": "Volker",
-    "version": (1, 1, 1),
+    "version": (1, 1, 2),
     "blender": (2, 90, 1),
     "location": "Properties Area > Output Properties > Autosave",
     "description": "Creates a YYMMDD-HHMMSS named subdirectory to save the .blend-file prior to rendering"
@@ -163,7 +163,7 @@ def get_comment(self):
 # properties definition        
 class AutoFilepathSettings(bpy.types.PropertyGroup):
     
-    use_autosave_render: bpy.props.BoolProperty(name="Autosave",
+    use_autosave_render: bpy.props.BoolProperty(name="Autosave on Render",
                                               description="Automatic save .blend prior to rendering in a timestamped sub-directory",
                                               default=False)
 
