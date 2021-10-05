@@ -19,11 +19,12 @@
 bl_info = {
     "name": "Autosave-Render",
     "author": "Volker",
-    "version": (1, 0, 1),
+    "version": (1, 1, 1),
     "blender": (2, 90, 1),
     "location": "Properties Area > Output Properties > Autosave",
     "description": "Creates a YYMMDD-HHMMSS named subdirectory to save the .blend-file prior to rendering"
         "and a .png file after rendering. UI resides in the Output Properties."
+        "Enter short comments to be appended as reminders to the subdirectory's name."
         "Manually delete superflous sub-directories by <Shift>-Clicking on the folder icon in Blender"
         "to open the base folder in your OS filebrowser.",
     "warning": "",
@@ -62,6 +63,10 @@ def autosave_blend_before_render(self):
     # not checkmarked -> do nothing
     if not bpy.context.scene.autosave_render_settings.use_autosave_render:
         return
+
+    # comment entered -> append to the new dirname
+    if bpy.context.scene.autosave_render_settings.autosave_comment:
+        base_path += "-" + bpy.context.scene.autosave_render_settings.autosave_comment
 
     # dir ! existing -> create
     if not os.path.exists(base_path):
@@ -118,6 +123,43 @@ def set_directory(self, value):
 def get_directory(self):
     return self.get("autosave_directory", bpy.context.scene.render.filepath )
 
+# show msg
+def invalid_comment(self, context,):
+    self.layout.label(text="Comment contained invalid characters, ignored.")
+
+msg_text=""
+def show_msg(self, context,):
+    global msg_text
+    self.layout.label(text=msg_text)
+
+# setter & getter for comments added to the dirname 
+def set_comment(self, value):
+
+    # no comment -> save & quit
+    if(value == ""):
+        self["autosave_comment"] = value
+        return
+
+    # check for valid pathname, eg ':>' etc arent allowed chars in windows
+    # test-create a folder having that name
+    testpath = os.path.join(bpy.context.scene.render.filepath, value)
+    global msg_text
+
+    try:
+        os.makedirs(testpath)
+        # came to here = success
+        self["autosave_comment"] = value
+        # delete testfolder 
+        os.removedirs(testpath)
+
+    except:
+        #inform user
+        msg_text = value
+        bpy.context.window_manager.popup_menu(show_msg, title="Comment contains invalid characters", icon='ERROR')
+
+def get_comment(self):
+    return self.get("autosave_comment", bpy.context.scene.render.filepath )
+
 # properties definition        
 class AutoFilepathSettings(bpy.types.PropertyGroup):
     
@@ -136,6 +178,13 @@ class AutoFilepathSettings(bpy.types.PropertyGroup):
                                         subtype="DIR_PATH",
                                         set=set_directory,
                                         get=get_directory)                                              
+
+    autosave_comment: bpy.props.StringProperty(name="Comment",
+                                        description="Optional short comment, appended to the name of the subdirectory. Don't use characters forbidden in filenames (':' etc)",
+                                        default="",
+                                        maxlen=200,
+                                        set=set_comment,
+                                        get=get_comment)                                              
 
 # panel class
 class AUTOFILEPATH_PT_panel(bpy.types.Panel):
@@ -161,6 +210,12 @@ class AUTOFILEPATH_PT_panel(bpy.types.Panel):
         
         row = layout.row( )
         row.prop(context.scene.autosave_render_settings, "use_autosave_bitmap")
+
+        row = layout.row()
+        row.label(text="Short Comment:")
+
+        row = layout.row()
+        row.prop(context.scene.autosave_render_settings, "autosave_comment", text="")
 
 # group all classes togeter
 classes = (AutoFilepathSettings, AUTOFILEPATH_PT_panel)
