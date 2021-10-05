@@ -248,7 +248,7 @@ def unregister():
         bpy.app.handlers.render_pre.remove(autosave_blend_before_render)
         
     if autosave_bitmap_after_render in bpy.app.handlers.render_post:
-        bpy.app.handlers.render_pre.remove(autosave_bitmap_after_render)
+        bpy.app.handlers.render_post.remove(autosave_bitmap_after_render)
 
 if __name__ == "__main__":
     register()
