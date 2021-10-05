@@ -9,7 +9,7 @@ bl_info = {
         "Manually delete superflous sub-directories by <Shift>-Clicking on the folder icon in Blender"
         "to open the base folder in your OS filebrowser.",
     "warning": "",
-    "wiki_url": "",
+    "wiki_url": "https://github.com/ICarryTheDustOfAJourney/Autosave-Render",
     "category": "Render"}
 
 import bpy
