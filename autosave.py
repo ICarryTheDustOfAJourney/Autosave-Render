@@ -19,7 +19,7 @@
 bl_info = {
     "name": "Autosave-Render",
     "author": "Volker",
-    "version": (1, 1, 2),
+    "version": (1, 1, 3),
     "blender": (2, 90, 1),
     "location": "Properties Area > Output Properties > Autosave",
     "description": "Creates a YYMMDD-HHMMSS named subdirectory to save the .blend-file prior to rendering"
@@ -95,6 +95,9 @@ def autosave_bitmap_after_render(self):
     if not bpy.context.scene.autosave_render_settings.use_autosave_bitmap:
         return
 
+    if not bpy.context.scene.autosave_render_settings.use_autosave_render:
+        return
+
     global base_path
 
     # append filename to path
@@ -158,7 +161,13 @@ def set_comment(self, value):
         bpy.context.window_manager.popup_menu(show_msg, title="Comment contains invalid characters", icon='ERROR')
 
 def get_comment(self):
-    return self.get("autosave_comment", bpy.context.scene.render.filepath )
+    
+    # return prop when existing
+    try:
+        return self["autosave_comment"] 
+
+    except:
+        return ""
 
 # properties definition        
 class AutoFilepathSettings(bpy.types.PropertyGroup):
@@ -189,7 +198,7 @@ class AutoFilepathSettings(bpy.types.PropertyGroup):
 # panel class
 class AUTOFILEPATH_PT_panel(bpy.types.Panel):
     
-    bl_label = "Autosave"
+    bl_label = "Autosave on Render"
     bl_space_type = "PROPERTIES"
     bl_region_type = "WINDOW"
     bl_context = "output"
