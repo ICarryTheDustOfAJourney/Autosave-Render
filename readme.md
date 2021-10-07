@@ -25,11 +25,11 @@ It should work on other OSes and/or in older Blender versions too.
 
 ## Usage
 
-The user interface appears in the Properties Area -> Output Properties -> Autosave:
+The user interface appears in the Properties Area -> Output Properties -> Autosave on Render:
 
 <img src="https://raw.githubusercontent.com/ICarryTheDustOfAJourney/Autosave-Render/assets/ui.png" alt="UI" style="width:16em; margin:2em" width="100"/>
 
-- set the "Autosave on Render" checkmark to save .blend files before rendering
+- set the "Autosave on Render" checkmark to save the .blend file before rendering
 
 - define/create the base-directory that will contain the new subdirectories
 
@@ -37,7 +37,7 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
 
 - optionally create a readme.txt. It can be previewed using the OS' file browser, its keywords will be indexed by the OS' search function.
     
-    The content:
+    The content of readme.txt looks like:
 
       ---- Blender Generated Readme 211007_200350 myproject.blend
       -- Scene Infos:
@@ -60,15 +60,15 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
       It can contain a history of the project or longer annotations.
       ---
 
-   The first section contains common infos about the Blender version and paramters used.
+   The first section contains general infos about the Blender version and paramters used.
    
    The 2nd section contains the metadata note entered under Output Properties -> Metadata, if any.
    
    The 3rd section is the content of a document named "readme" from Blender's built-in texteditor, if a text with this name exists. It can contain information concerning this project, its history, keywords etc.
 
-- optionally enter a short note to be appended to the new directory's name. Free shorthand reminder like "evee only", "applied" or "!" when used in production etc. Use only characters allowed in your filesystem (Windows: no ":&lt;&gt;" etc). 
+- optionally enter a short note to be appended to the new directory's name. Free shorthand reminder like "eevee only", "applied" or "!" when used in production etc. Use only characters allowed in your filesystem (Windows: no ":&lt;&gt;" etc). 
 
-  This leads to folder names like "211007-145010-with geometry nodes, final version", intended as a quick hint when revisiting the folder after a while
+  This leads to folder names like "211007-145010-with geometry nodes, final version", intended as a quick reminder when revisiting the folder after a while
 
 - finally start the renderprocess hitting &lt;F12> and browse the new subdirectory
 
@@ -86,7 +86,7 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
 Shift your base-directory into the new sub-directory once you think you achieved significant progress with that render.
 This transforms the otherwise linear folder structure into a tree, having elaborated versions in its branches.
 
-Optionally rename the parent folder with a speaking name for better orientation when browsing the filesystem lateron. The latest and/or best version should then be in the latest & deepest leaf folder.
+Optionally rename the parent folder with a speaking name for better orientation when browsing the filesystem later on. The latest and/or best version should then be in the latest & deepest leaf folder.
 
 ...unless you give up an idea too soon.
 
