@@ -1,4 +1,4 @@
-# Autosave - Automatically save .blend and .png files when rendering images
+# Autosave - Automatically save .blend, .png and readme.txt files when rendering
 
 ## Purpose 
 
