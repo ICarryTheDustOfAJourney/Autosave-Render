@@ -1,4 +1,4 @@
-# Autosave - Automatically save .blend and .png files when rendering images
+# Autosave - Automatically save .blend, .png and readme.txt files when rendering
 
 ## Purpose 
 
@@ -60,7 +60,7 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
       It can contain a history of the project or longer annotations.
       ---
 
-   The first section contains general infos about the Blender version and paramters used.
+   The first section contains general infos about the Blender version and parameters used.
    
    The 2nd section contains the metadata note entered under Output Properties -> Metadata, if any.
    
