@@ -26,7 +26,7 @@ from bpy.app.handlers import persistent
 bl_info = {
     "name": "Autosave-Render",
     "author": "icarrythedustofajourney (Volker)",
-    "version": (1, 2, 5),
+    "version": (1, 2, 6),
     "blender": (2, 90, 1),
     "location": "Properties Area > Output Properties > Autosave",
     "description": "Creates a YYMMDD-HHMMSS named subdirectory to save the .blend-file prior to rendering"
@@ -45,17 +45,15 @@ bl_info = {
 
 
 @persistent
-def autosave_blend_before_render(self):
+def autosave_blend_before_render(scene):
     # save .blend in a newly created subdirectory named yymmdd-hhmmss
 
-    # generate destination dir name
-
     # default = output path
-    path = bpy.context.scene.render.filepath
+    path = scene.render.filepath
 
     # own path found -> use it
-    if bpy.context.scene.autosave_render_settings.autosave_directory:
-        path = bpy.context.scene.autosave_render_settings.autosave_directory
+    if scene.autosave_render_settings.autosave_directory:
+        path = scene.autosave_render_settings.autosave_directory
 
     # set the global autosave path for the image after rendering
     global base_path
@@ -65,12 +63,12 @@ def autosave_blend_before_render(self):
     base_path = os.path.join(path, now.strftime('%y%m%d_%H%M%S'))
 
     # not checkmarked -> do nothing
-    if not bpy.context.scene.autosave_render_settings.use_autosave_render:
+    if not scene.autosave_render_settings.use_autosave_render:
         return
 
     # note entered -> append to the new dirname
-    if bpy.context.scene.autosave_render_settings.use_autosave_note:
-        base_path += "-" + bpy.context.scene.autosave_render_settings.use_autosave_note
+    if scene.autosave_render_settings.use_autosave_note:
+        base_path += "-" + scene.autosave_render_settings.use_autosave_note
 
     # dir ! existing -> create
     if not os.path.exists(base_path):
@@ -89,18 +87,18 @@ def autosave_blend_before_render(self):
     bpy.ops.wm.save_as_mainfile(filepath=filepath, copy=True)
 
     # text named readme found -> export it into readme.txt
-    if bpy.context.scene.autosave_render_settings.use_autosave_readme:
+    if scene.autosave_render_settings.use_autosave_readme:
 
         # start with datetime
         text = "---- Blender Generated Readme " + \
             now.strftime('%y%m%d_%H%M%S') + " " + filename
 
         # append scene infos
-        text += "\n\n-- Scene Infos:" + scene_infos(self)
+        text += "\n\n-- Scene Infos:" + scene_infos(scene)
 
         # metadata note set -> append
-        if bpy.context.scene.render.stamp_note_text:
-            text += "\n\n-- Metadata Note:\n" + bpy.context.scene.render.stamp_note_text
+        if scene.render.stamp_note_text:
+            text += "\n\n-- Metadata Note:\n" + scene.render.stamp_note_text
 
         # readme text found -> append
         if "readme" in bpy.data.texts:
@@ -116,35 +114,35 @@ def autosave_blend_before_render(self):
         # write text to file
         path.write_text(text)
 
-    if not bpy.context.scene.autosave_render_settings.use_autosave_png:
+    if not scene.autosave_render_settings.use_autosave_png:
         base_path = ""
 
 
 @persistent
-def autosave_bitmap_after_render(self):
+def autosave_bitmap_after_render(scene):
     # save .png in a newly created subdirectory named yymmdd-hhmmss
 
     # not checkmarked -> do nothing
-    if not bpy.context.scene.autosave_render_settings.use_autosave_png:
+    if not scene.autosave_render_settings.use_autosave_png:
         return
 
-    if not bpy.context.scene.autosave_render_settings.use_autosave_render:
+    if not scene.autosave_render_settings.use_autosave_render:
         return
 
-    global base_path
-
-    # append filename to path
+    # append .blend filename to path
     filename = os.path.basename(bpy.data.filepath)
 
     # no filename -> invent one
     if not filename:
         filename = "default.blend"
 
+    global base_path
+
     # append filename to path created before rendering
     filepath = os.path.join(base_path, filename + ".png")
 
     # save current rendering
-    bpy.context.scene.render.image_settings.file_format = 'PNG'
+    scene.render.image_settings.file_format = 'PNG'
     bpy.data.images["Render Result"].save_render(filepath)
 
     # reset path for next try
@@ -156,7 +154,7 @@ def autosave_bitmap_after_render(self):
 
 
 # set destination dir default
-base_path = ''
+base_path = ""
 
 
 def scene_infos(scene):
@@ -172,6 +170,7 @@ def scene_infos(scene):
         bpy.app.build_time.decode("utf-8")
     #note += "\n  Version File: " + str(bpy.app.version_file)
     #note += "\n  Version Data: " + str(bpy.data.version)
+    note += "\n    Scene Name: " + str(scene.name)
     note += "\n Current Frame: " + str(scene.frame_current)
     note += "\n  Resolution %: " + str(scene.render.resolution_percentage)
     note += "\nView Transform: " + str(view_settings.view_transform)
@@ -237,8 +236,7 @@ def set_note(self, value):
 
     # check for valid pathname, eg ':>' etc arent allowed chars in windows
     # test-create a folder having that name
-    testpath = os.path.join(bpy.context.scene.render.filepath, value)
-    global msg_text
+    testpath = os.path.join(self["autosave_directory"], value)
 
     try:
         os.makedirs(testpath)
@@ -249,6 +247,7 @@ def set_note(self, value):
 
     except:
         # inform user
+        global msg_text
         msg_text = value
         bpy.context.window_manager.popup_menu(
             show_msg, title="Note contains invalid characters", icon='ERROR')
@@ -270,6 +269,7 @@ def get_note(self):
 
 
 class AutoFilepathSettings(bpy.types.PropertyGroup):
+
     use_autosave_render: bpy.props.BoolProperty(name="Autosave on Render",
                                                 description="Automatic save .blend before rendering",
                                                 default=False)
