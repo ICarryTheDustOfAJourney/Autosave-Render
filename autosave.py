@@ -36,7 +36,8 @@ bl_info = {
     "to open the base folder in your OS filebrowser.",
     "warning": "",
     "wiki_url": "https://github.com/ICarryTheDustOfAJourney/Autosave-Render",
-    "category": "Render"}
+    "category": "Render"
+}
 
 # ------------------
 # event-handlers:
