@@ -1,4 +1,4 @@
-# Autosave - Automatically save .blend, .png and readme.txt files when rendering
+# Autosave - Render: Automatically save .blend, .png and readme.txt files when rendering
 
 ## Purpose 
 
@@ -43,6 +43,7 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
       -- Scene Infos:
            Blender V: 2.93.4
                Built: 2021-08-31 23:48:04
+          Scene Name: Assets               
        Current Frame: 1
         Resolution %: 100
       View Transform: Filmic
