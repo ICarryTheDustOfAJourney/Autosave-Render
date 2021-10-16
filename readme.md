@@ -1,8 +1,8 @@
-# Autosave - Render: Automatically save .blend, .png and readme.txt files when rendering
+# Autosave - Render: Automatically save .blend, .png and readme.txt files when rendering with Blender
 
 ## Purpose 
 
-This add-on provides an easy way to document & preserve a project's progress over time and to jump back to an arbitrary previous state, if required.
+This Blender Add-On provides an easy way to document & preserve a project's progress over time and to jump back to an arbitrary previous state, if required.
 
 It saves the .blend, .png (render image, optional) and a readme.txt (optional infos) -file in a new, dedicated subdirectory on every rendering. 
 
