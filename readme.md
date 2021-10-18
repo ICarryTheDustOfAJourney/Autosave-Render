@@ -6,13 +6,17 @@ This Blender Add-On provides an easy way to document & preserve a project's prog
 
 It saves the .blend, .png (render image, optional) and a readme.txt (optional infos) -file in a new, dedicated subdirectory on every rendering. 
 
-The new sub-directories are named YYMMDD-hhmmss + an optional short note, located in a base-directory of your choice.
-
 Creating images/animations with Blender is usually a highly iterative trial-and-error process, that can lead into dead ends when using wrong techniques or taking bad artistic choices.
 
 When trying to resume at a former version, it can be difficult to find the matching .blend file for that state of the project.
 
 This add-on can be understood as a basic but efficient source control system for the ~~poor~~ artist.
+
+The dynamically created sub-directories are named YYMMDD-hhmmss (timestamp of creation) and more information, all located in a base-directory of your choice. 
+
+After V 1.2.6 the directory-name will contain the filename without .blend, the relative resolution and the number of samples, if using cycles plus an optional note. 
+
+Example: `211018_152614-DoughnutsUsingGeometrynodes01-10%-128smpl-my short note`
 
 ## Installation
 
@@ -69,7 +73,7 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
 
 - optionally enter a short note to be appended to the new directory's name. Free shorthand reminder like "eevee only", "applied" or "!" when used in production etc. Use only characters allowed in your filesystem (Windows: no ":&lt;&gt;" etc). 
 
-  This leads to folder names like "211007-145010-with geometry nodes, final version", intended as a quick reminder when revisiting the folder after a while
+  The note is intended as a short reminder when revisiting the folder in the future
 
 - finally start the renderprocess hitting &lt;F12> and browse the new subdirectory
 

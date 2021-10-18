@@ -62,6 +62,16 @@ def autosave_blend_before_render(scene):
     now = datetime.datetime.now()
     base_path = os.path.join(path, now.strftime('%y%m%d_%H%M%S'))
 
+    # add the .blend file name to the dirname
+    base_path += "-" + Path(os.path.basename(bpy.data.filepath)).stem
+
+    # add resolution and #samples to the dirname
+    base_path += "-" + str(scene.render.resolution_percentage) + "%"
+
+    # using cycles -> add # of samples
+    if str(scene.render.engine) == 'CYCLES':
+        base_path += "-" + str(scene.cycles.samples) + "smpl"
+
     # not checkmarked -> do nothing
     if not scene.autosave_render_settings.use_autosave_render:
         return
