@@ -81,6 +81,7 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
 - &lt;Shift>-Click on the folder icon opens the base-directory in your OS' file system browser
 - because the .blend file is saved before and the .png file after rendering, rendertime is documented too
 - choose your base-directory on an external or network drive. This may save your live if your SSD dies
+- there are rare cases when Blender can't write the .blend file at that moment. Make sure saving the blend is actually saved when rendering final versions etc
 
 ## Advanced usage
 

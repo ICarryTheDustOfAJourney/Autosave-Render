@@ -70,9 +70,18 @@ def autosave_blend_before_render(scene):
     if scene.autosave_render_settings.use_autosave_note:
         base_path += "-" + scene.autosave_render_settings.use_autosave_note
 
-    # dir ! existing -> create
-    if not os.path.exists(base_path):
-        os.makedirs(base_path)
+    # make sure script continues
+    global msg_text
+    try:
+
+        # dir ! existing -> create
+        if not os.path.exists(base_path):
+            os.makedirs(base_path)
+
+    except:
+        msg_text = base_path
+        bpy.context.window_manager.popup_menu(
+            show_msg, title="Can not create directory", icon='ERROR')
 
     # append filename to path
     filename = os.path.basename(bpy.data.filepath)
@@ -83,8 +92,18 @@ def autosave_blend_before_render(scene):
 
     filepath = os.path.join(base_path, filename)
 
-    # save current .blend file as a copy
-    bpy.ops.wm.save_as_mainfile(filepath=filepath, copy=True)
+    try:
+        # under some circumstances, .blend file can't be written and script crashes
+        # make script continue even then
+
+        # save current .blend file as a copy
+        bpy.ops.wm.save_as_mainfile(filepath=filepath, copy=True)
+
+    except:
+        # inform user
+        msg_text = filepath
+        bpy.context.window_manager.popup_menu(
+            show_msg, title="Can not save .blend file", icon='ERROR')
 
     # text named readme found -> export it into readme.txt
     if scene.autosave_render_settings.use_autosave_readme:
@@ -111,8 +130,15 @@ def autosave_blend_before_render(scene):
         # build readme file path/name
         path = Path(os.path.join(base_path, "readme.txt"))
 
-        # write text to file
-        path.write_text(text)
+        try:
+            # write text to file
+            path.write_text(text)
+
+        except:
+            # inform user
+            msg_text = filepath
+            bpy.context.window_manager.popup_menu(
+                show_msg, title="Can not save readme.txt file", icon='ERROR')
 
     if not scene.autosave_render_settings.use_autosave_png:
         base_path = ""
@@ -134,7 +160,16 @@ def autosave_bitmap_after_render(scene):
 
     # no filename -> invent one
     if not filename:
-        filename = "default.blend"
+        filename = "untiteled.blend"
+
+    # not the standard scene -> add name
+    if scene.name != "Scene":
+        filename += "-" + scene.name
+
+    # replace illegal chars
+    filename = filename.replace(":", "#")
+    filename = filename.replace(">", "#")
+    filename = filename.replace("<", "#")
 
     global base_path
 
@@ -168,8 +203,10 @@ def scene_infos(scene):
     note += "\n         Built: " + \
         bpy.app.build_date.decode("utf-8") + " " + \
         bpy.app.build_time.decode("utf-8")
+
     #note += "\n  Version File: " + str(bpy.app.version_file)
     #note += "\n  Version Data: " + str(bpy.data.version)
+
     note += "\n    Scene Name: " + str(scene.name)
     note += "\n Current Frame: " + str(scene.frame_current)
     note += "\n  Resolution %: " + str(scene.render.resolution_percentage)
