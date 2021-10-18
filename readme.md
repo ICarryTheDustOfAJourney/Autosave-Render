@@ -17,6 +17,11 @@ The dynamically created sub-directories are named YYMMDD-hhmmss (timestamp of cr
 After V 1.2.6 the directory-name will contain the filename without .blend, the relative resolution and the number of samples, if using cycles plus an optional note. 
 
 Example: `211018_152614-DoughnutsUsingGeometrynodes01-10%-128smpl-my short note`
+- `211018_152614` : date-time when rendering started
+- `DoughnutsUsingGeometrynodes01` : filename without .blend
+- `10%` : 10 percent of the resolution
+- `128smpl` : Cycles with 128 samples
+- `my short note` : optional short note
 
 ## Installation
 
@@ -85,7 +90,7 @@ The user interface appears in the Properties Area -> Output Properties -> Autosa
 - &lt;Shift>-Click on the folder icon opens the base-directory in your OS' file system browser
 - because the .blend file is saved before and the .png file after rendering, rendertime is documented too
 - choose your base-directory on an external or network drive. This may save your live if your SSD dies
-- there are rare cases when Blender can't write the .blend file at that moment. Make sure saving the blend is actually saved when rendering final versions etc
+- there are rare cases when Blender can't write the .blend file at that moment. Make sure the .blend file is actually saved when rendering milestone or final versions
 
 ## Advanced usage
 
