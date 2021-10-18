@@ -26,7 +26,7 @@ from bpy.app.handlers import persistent
 bl_info = {
     "name": "Autosave-Render",
     "author": "icarrythedustofajourney (Volker)",
-    "version": (1, 2, 6),
+    "version": (1, 3, 7),
     "blender": (2, 90, 1),
     "location": "Properties Area > Output Properties > Autosave",
     "description": "Creates a YYMMDD-HHMMSS named subdirectory to save the .blend-file prior to rendering"
