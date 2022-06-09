@@ -30,6 +30,9 @@ Example: `211018_152614-DoughnutsUsingGeometrynodes01-10%-128smpl-my short note`
 - don't forget to activate it by setting the checkmark
 
 Developed & tested under Windows 10 on Blender V2.90.1, 2.93 and 3.0 Alpha.
+
+Works with Blender V3.1 and 3.2.
+
 It should work on other OSes and/or in older Blender versions too.
 
 ## Usage
