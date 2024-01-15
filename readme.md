@@ -29,7 +29,7 @@ Example: `211018_152614-DoughnutsUsingGeometrynodes01-10%-128smpl-my short note`
 - in Blender: Edit -> Preferences-> Add-on -> Install... and pick the .py file
 - don't forget to activate it by setting the checkmark
 
-Developed & tested under Windows 10 on Blender V2.90.1, 2.93 and 3.0 Alpha.
+Developed & tested under Windows 10 on Blender V2.90.1, 2.93, 3.x, and 4.x.
 
 Works with Blender V3.1, V3.2 and V3.3.
 
